@@ -4,6 +4,10 @@
   "description": "An example of an app that uses a movie API",
   "main": "index.js",
   "scripts": {
+    "compile": "tsc -p ./",
+    "start": "tsc -p ./ && node tsbuild/server/server.js",
+    "build": "NODE_ENV=production webpack",
+    "dev": "NODE_ENV=development tsc -p ./ && nodemon tsbuild/server/server.js & webpack-dev-server --open --hot",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": "git+https://github.com/bhayashi/api-yearOne.git",
