@@ -19,14 +19,6 @@ module.exports = {
         target: 'http://localhost:3000/',
         secure: false,
       },
-      '/api': {
-        target: 'http://localhost:3000/',
-        secure: false,
-      },
-      '/auth': {
-        target: 'http://localhost:3000/',
-        secure: false,
-      },
     },
   },
   module: {
@@ -41,11 +33,6 @@ module.exports = {
           },
         ],
       },
-      // {
-      //   enforce: 'pre',
-      //   test: /\.js$/,
-      //   loader: 'source-map-loader',
-      // },
       {
         test: /\.s[ac]ss$/i,
         exclude: /node_modules/,
@@ -61,9 +48,4 @@ module.exports = {
     extensions: ['.js', '.ts', '.tsx', '.jsx', '.json'],
     modules: ['node_modules'],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, './public/index.html'),
-    }),
-  ],
 };
