@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import cors from 'cors';
+import axios from 'axios';
 
 require('dotenv').config();
 
@@ -8,8 +9,8 @@ const PORT = 3000;
 const app = express();
 app.use(cors());
 
-const uri: string =
-  typeof process.env.HULU_API_KEY === 'string' ? process.env.HULU_API_KEY : '';
+const omdbKey: string =
+  typeof process.env.OMDB_KEY === 'string' ? process.env.OMDB_KEY : '';
 
 app.use(express.static('public'));
 
