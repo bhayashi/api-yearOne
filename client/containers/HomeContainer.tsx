@@ -3,18 +3,22 @@ import Search from '../components/Search';
 import SearchResults from '../components/SearchResults';
 
 const HomeContainer = () => {
-  const [omdbResults, setOmdbResults] = useState(false);
+  const [omdbStatus, setOmdbStatus] = useState(false);
   const [searchText, setSearchText] = useState('');
+  const [omdbResults, setOmdbResults] = useState([]);
 
   async function handleEnter(e: any): Promise<any> {
     if (e.key === 'Enter') {
-      setOmdbResults(true);
+      setOmdbStatus(true);
       setSearchText(e.target.value);
       await fetch(`http://www.omdbapi.com/?apikey=67bbf4fa&s=${searchText}`, {
         method: 'GET',
       })
         .then((response: any) => response.json())
-        .then((response) => console.log(response))
+        .then((response) => {
+          console.log(response.Search);
+          setOmdbResults(response.Search);
+        })
         .catch((err) => console.error(err));
       setSearchText('');
     }
@@ -34,7 +38,13 @@ const HomeContainer = () => {
           value={searchText}
         />
       </div>
-      {omdbResults ? <SearchResults /> : <div />}
+      {omdbStatus ? (
+        omdbResults.map((movie: any) => (
+          <SearchResults key={movie.imdbID} data={movie} />
+        ))
+      ) : (
+        <div />
+      )}
     </div>
   );
 };
