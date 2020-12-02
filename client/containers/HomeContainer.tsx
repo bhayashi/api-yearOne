@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import SearchResults from '../components/SearchResults';
 
 const HomeContainer = () => {
@@ -43,7 +44,6 @@ const HomeContainer = () => {
         src="https://fontmeme.com/permalink/201202/e8897ef54599f593d10071f7833c4582.png"
         alt="netflix-font"
       />
-      {/* <h1 id="home-title">OPEN MOVIE DATABASE</h1> */}
       <div>
         <input
           id="search-bar"
@@ -57,7 +57,9 @@ const HomeContainer = () => {
       <div id="search-results-container">
         {omdbStatus ? (
           omdbResults.map((movie: any) => (
-            <SearchResults key={movie.imdbID} data={movie} />
+            <Link to={`/details/${movie.imdbID}`} className="omdb-results-link">
+              <SearchResults key={movie.imdbID} data={movie} />
+            </Link>
           ))
         ) : (
           <div />
