@@ -1,11 +1,24 @@
 import React, { useState } from 'react';
-import Search from '../components/Search';
 import SearchResults from '../components/SearchResults';
 
 const HomeContainer = () => {
-  const [omdbStatus, setOmdbStatus] = useState(false);
+  const [omdbStatus, setOmdbStatus] = useState(true);
   const [searchText, setSearchText] = useState('');
-  const [omdbResults, setOmdbResults] = useState([]);
+  const dummyData = {
+    Poster:
+      'https://m.media-amazon.com/images/M/MV5BYzc3OGZjYWQtZGFkMy00YTNlLWE5NDYtMTRkNTNjODc2MjllXkEyXkFqcGdeQXVyNjExODE1MDc@._V1_SX300.jpg',
+    Title: 'Johnny Test',
+    Year: '2005-2014',
+    imdbID: 'tt0454349',
+  };
+  const dummyData2 = {
+    Poster:
+      'https://m.media-amazon.com/images/M/MV5BYzc3OGZjYWQtZGFkMy00YTNlLWE5NDYtMTRkNTNjODc2MjllXkEyXkFqcGdeQXVyNjExODE1MDc@._V1_SX300.jpg',
+    Title: 'Johnny Test: The Last Man From Another Planet Blah BLah',
+    Year: '2005-2014',
+    imdbID: 'tt0454348',
+  };
+  const [omdbResults, setOmdbResults] = useState([dummyData, dummyData2]);
 
   async function handleEnter(e: any): Promise<any> {
     if (e.key === 'Enter') {
@@ -26,8 +39,7 @@ const HomeContainer = () => {
 
   return (
     <div id="home-container">
-      <h1>Open Movie Database</h1>
-      {/* <Search /> */}
+      <h1 id="home-title">Open Movie Database</h1>
       <div>
         <input
           id="search-bar"
@@ -38,13 +50,15 @@ const HomeContainer = () => {
           value={searchText}
         />
       </div>
-      {omdbStatus ? (
-        omdbResults.map((movie: any) => (
-          <SearchResults key={movie.imdbID} data={movie} />
-        ))
-      ) : (
-        <div />
-      )}
+      <div id="search-results-container">
+        {omdbStatus ? (
+          omdbResults.map((movie: any) => (
+            <SearchResults key={movie.imdbID} data={movie} />
+          ))
+        ) : (
+          <div />
+        )}
+      </div>
     </div>
   );
 };

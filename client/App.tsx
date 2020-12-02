@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import HomeContainer from './containers/HomeContainer';
+import '../public/style.scss';
 
 function App() {
   return (
