@@ -1,31 +1,39 @@
+$titleCardText: rgb(209, 209, 209);
+$titleCardBorder: rgb(68, 68, 68);
+
 body {
-  background-color: rgb(25, 197, 219);
+  background-color: rgb(0, 0, 0);
 }
 
 #home-container {
   text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  h1 {
+    color: rgb(229, 9, 20);
+  }
 }
 
 #search-results-container {
-  border: solid 1px purple;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
 .search-results {
-  border: solid 1px rgb(209, 209, 209);
+  border: solid 2px $titleCardBorder;
   border-radius: 7px;
-  background-color: rgb(209, 209, 209);
+  // background-color: $titleCardText;
   margin: 1rem;
-  padding: 0rem 2rem 1rem 2rem;
-  max-width: 22rem;
-  height: 24rem;
-  // justify-items: space-between;
+  padding: 0.4rem 2rem 1rem 2rem;
+  max-width: 18rem;
+  height: 22.5rem;
+  flex-basis: 100%;
+  color: $titleCardText;
   h2 {
     word-wrap: normal;
+    font-size: 1.1em;
   }
   .movie-poster {
     height: 15rem;

@@ -39,7 +39,11 @@ const HomeContainer = () => {
 
   return (
     <div id="home-container">
-      <h1 id="home-title">Open Movie Database</h1>
+      <img
+        src="https://fontmeme.com/permalink/201202/e8897ef54599f593d10071f7833c4582.png"
+        alt="netflix-font"
+      />
+      {/* <h1 id="home-title">OPEN MOVIE DATABASE</h1> */}
       <div>
         <input
           id="search-bar"
