@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const SearchResults = () => {
-  const [searchText, setSearchText] = useState('');
-
+const SearchResults = (props: any) => {
+  const { data } = props;
+  const { Title, Year, Poster } = data;
   return (
     <div>
-      <h2>Search Results</h2>
+      <h2>{Title}</h2>
+      <p>{Year}</p>
+      <img src={Poster} alt={`Poster for ${Title}`} />
     </div>
   );
 };
