@@ -39,11 +39,15 @@
   "dependencies": {
     "@types/react-router-dom": "^5.1.6",
     "cors": "^2.8.5",
+    "css-loader": "^5.0.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router": "^5.2.0",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "sass": "^1.29.0",
+    "sass-loader": "^10.1.0",
+    "style-loader": "^2.0.0"
   }
 }

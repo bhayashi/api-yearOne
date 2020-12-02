@@ -1,0 +1,33 @@
+body {
+  background-color: rgb(25, 197, 219);
+}
+
+#home-container {
+  text-align: center;
+}
+
+#search-results-container {
+  border: solid 1px purple;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-results {
+  border: solid 1px rgb(209, 209, 209);
+  border-radius: 7px;
+  background-color: rgb(209, 209, 209);
+  margin: 1rem;
+  padding: 0rem 2rem 1rem 2rem;
+  max-width: 22rem;
+  height: 24rem;
+  // justify-items: space-between;
+  h2 {
+    word-wrap: normal;
+  }
+  .movie-poster {
+    height: 15rem;
+  }
+}
