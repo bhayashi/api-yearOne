@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 const DetailsContainer = () => {
+  const { imdbID } = useParams();
   const dummyData = {
     Title: 'Inception',
     Year: '2010',
@@ -48,6 +50,7 @@ const DetailsContainer = () => {
   return (
     <div id="details-div">
       <h2>{Title}</h2>
+      <p>{imdbID}</p>
       <p>{Director}</p>
       <p>{Year}</p>
       <p>{Plot}</p>
