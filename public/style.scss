@@ -42,7 +42,12 @@ body {
   }
 }
 
-#details-div {
+#details-card {
   font-family: Arial, Helvetica, sans-serif;
-  color: white;
+  color: $titleCardText;
+  text-align: center;
+  border: solid 2px $titleCardBorder;
+  padding: 1rem 2rem 2rem 2rem;
+  width: 50vw;
+  margin: 3rem auto;
 }

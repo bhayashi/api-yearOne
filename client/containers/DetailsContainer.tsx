@@ -4,11 +4,12 @@ import { useParams } from 'react-router-dom';
 const DetailsContainer = () => {
   const { imdbID } = useParams<{ imdbID: string }>();
   const dummyData = {
-    Title: 'null',
+    Title: 'Inception',
     Director: 'null',
     Year: 'null',
     Plot: 'null',
-    Poster: 'null',
+    Poster:
+      'https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg',
   };
   const [movieDetails, setMovieDetails] = useState(dummyData);
 
@@ -31,7 +32,7 @@ const DetailsContainer = () => {
   }
 
   return (
-    <div id="details-div">
+    <div id="details-card">
       <h2>{Title}</h2>
       <p>{Director}</p>
       <p>{Year}</p>
