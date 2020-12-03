@@ -1,3 +1,4 @@
+$logoTitle: rgb(229, 9, 20);
 $titleCardText: rgb(209, 209, 209);
 $titleCardBorder: rgb(68, 68, 68);
 
@@ -10,7 +11,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   margin-top: 2rem;
   h1 {
-    color: rgb(229, 9, 20);
+    color: $logoTitle;
   }
 }
 
@@ -28,17 +29,16 @@ body {
     max-width: 18rem;
     height: 22.5rem;
     text-decoration: none;
-  }
-}
-
-.search-results {
-  color: $titleCardText;
-  h2 {
-    word-wrap: normal;
-    font-size: 1.1em;
-  }
-  .movie-poster {
-    height: 15rem;
+    .search-results {
+      color: $titleCardText;
+      h2 {
+        word-wrap: normal;
+        font-size: 1.1em;
+      }
+      .movie-poster {
+        height: 15rem;
+      }
+    }
   }
 }
 
@@ -50,4 +50,7 @@ body {
   padding: 1rem 2rem 2rem 2rem;
   width: 50vw;
   margin: 3rem auto;
+  // #like-btn-container p button {
+  //   display: inline-block;
+  // }
 }

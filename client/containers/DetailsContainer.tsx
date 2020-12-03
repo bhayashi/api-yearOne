@@ -6,9 +6,10 @@ const DetailsContainer = () => {
   const { imdbID } = useParams<{ imdbID: string }>();
   const dummyData = {
     Title: 'Inception',
-    Director: 'null',
-    Year: 'null',
-    Plot: 'null',
+    Director: 'Christopher Nolan',
+    Year: '2010',
+    Plot:
+      'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.',
     Poster:
       'https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg',
   };
@@ -34,11 +35,36 @@ const DetailsContainer = () => {
   return (
     <div id="details-card">
       <h2>{Title}</h2>
-      <p>{Director}</p>
-      <p>{Year}</p>
-      <p>{Plot}</p>
-      <p>Thumbs Up!</p>
+      <p>
+        {Year}
+        <br />
+        {Director}
+        <br />
+        <br />
+        {Plot}
+      </p>
       <img className="movie-poster" src={Poster} alt={`Poster for ${Title}`} />
+      <div id="like-btn-container">
+        42&nbsp;&nbsp;
+        <button
+          className="like-btn"
+          id="thumbs-up-btn"
+          type="button"
+          value="thumbsUp"
+        >
+          <i className="fa fa-thumbs-up" aria-hidden="true" />
+        </button>
+        <button
+          className="like-btn"
+          id="thumbs-down-btn"
+          type="button"
+          value="thumbsDown"
+        >
+          <i className="fa fa-thumbs-down" aria-hidden="true" />
+        </button>
+        &nbsp;&nbsp;3
+      </div>
+      <br />
     </div>
   );
 };
