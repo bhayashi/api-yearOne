@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable object-curly-newline */
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 const DetailsContainer = () => {
@@ -19,7 +20,6 @@ const DetailsContainer = () => {
     })
       .then((response: any) => response.json())
       .then((response) => {
-        console.log(response);
         setMovieDetails(response);
       })
       .catch((err) => console.error(err));
