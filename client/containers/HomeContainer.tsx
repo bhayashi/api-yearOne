@@ -57,7 +57,11 @@ const HomeContainer = () => {
       <div id="search-results-container">
         {omdbStatus ? (
           omdbResults.map((movie: any) => (
-            <Link to={`/details/${movie.imdbID}`} className="omdb-results-link">
+            <Link
+              to={`/details/${movie.imdbID}`}
+              className="omdb-results-link"
+              key={`link${movie.imdbID}`}
+            >
               <SearchResults key={movie.imdbID} data={movie} />
             </Link>
           ))
