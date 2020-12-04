@@ -1,5 +1,5 @@
 /* eslint-disable object-curly-newline */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 const DetailsContainer = () => {
@@ -30,30 +30,38 @@ const DetailsContainer = () => {
   const [dislikes, setDislikes] = useState(0);
   const [btnDisabled, setBtnDisabled] = useState(false);
 
-  async function likeMovie(id: string): Promise<any> {
+  async function likeMovie(id: string, up: number, down: number): Promise<any> {
     await fetch('/movieLikes', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ imdbID: id }),
+      body: JSON.stringify({ imdbID: id, likes: up, dislikes: down }),
     })
       .then((response: any) => response.json())
       .then((response: any) => {
         console.log('PSQL Movie:', response[0]);
-        setLikes(response[0].likes);
-        setDislikes(response[0].dislikes);
+        if (response[0].likes > likes) {
+          setLikes(response[0].likes);
+        }
+        if (response[0].dislikes > dislikes) {
+          setDislikes(response[0].dislikes);
+        }
       })
       .catch((err: Error) => console.log(err));
   }
 
-  likeMovie(imdbID);
+  useEffect(() => {
+    likeMovie(imdbID, likes, dislikes);
+  }, []);
+
   const onLike = () => {
     setLikes(likes + 1);
-    likeMovie(imdbID);
+    likeMovie(imdbID, likes, dislikes);
     setBtnDisabled(true);
   };
 
   const onDislike = () => {
     setDislikes(dislikes + 1);
+    likeMovie(imdbID, likes, dislikes);
     setBtnDisabled(true);
   };
 
