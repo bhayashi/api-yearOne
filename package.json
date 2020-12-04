@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "An example of an app that uses a movie API",
   "main": "index.js",
+  "engines": {
+    "node": "12.x",
+    "yarn": "1.x"
+  },
   "scripts": {
     "compile": "tsc -p ./",
     "start": "tsc -p ./ && node tsbuild/server/server.js",
@@ -37,6 +41,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@types/react-router": "^5.1.8",
     "@types/react-router-dom": "^5.1.6",
     "cors": "^2.8.5",
     "css-loader": "^5.0.1",
