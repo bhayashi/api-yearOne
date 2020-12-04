@@ -1,25 +1,29 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import SearchResults from '../components/SearchResults';
+import { MovieSearchResult } from '../utils/interfaces';
 
+// container for search-bar and SearchResults components aka movie-title-cards
 const HomeContainer = () => {
   const [omdbStatus, setOmdbStatus] = useState(true);
   const [searchText, setSearchText] = useState('');
   const [omdbResults, setOmdbResults] = useState([]);
 
-  async function handleEnter(e: any): Promise<any> {
+  // function to handle pressing enter on the search bar
+  function handleEnter(e: React.KeyboardEvent): void {
     if (e.key === 'Enter') {
       setOmdbStatus(true);
-      setSearchText(e.target.value);
-      await fetch(`https://www.omdbapi.com/?apikey=67bbf4fa&s=${searchText}`, {
+      if (e.target !== null) {
+        setSearchText((e.target as HTMLInputElement).value);
+      }
+      fetch(`https://www.omdbapi.com/?apikey=67bbf4fa&s=${searchText}`, {
         method: 'GET',
       })
-        .then((response: any) => response.json())
+        .then((response: Response) => response.json())
         .then((response) => {
-          console.log(response.Search);
           setOmdbResults(response.Search);
         })
-        .catch((err) => console.error(err));
+        .catch((err: Error) => console.error(err));
       setSearchText('');
     }
   }
@@ -42,7 +46,7 @@ const HomeContainer = () => {
       </div>
       <div id="search-results-container">
         {omdbStatus ? (
-          omdbResults.map((movie: any) => (
+          omdbResults.map((movie: MovieSearchResult) => (
             <Link
               to={`/details/${movie.imdbID}`}
               className="omdb-results-link"
