@@ -7,7 +7,7 @@ const dbController = require('./controller');
 
 require('dotenv').config();
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(cors());
 // require all interactions to use/parse JSON
@@ -49,4 +49,4 @@ app.use((err, _req, res: any) => {
   return res.status(errObj.status).json(errObj.message);
 });
 
-app.listen(PORT, () => console.log('Listening on 3000'));
+app.listen(PORT, () => console.log(`Listening on ${PORT}`));
