@@ -25,7 +25,7 @@ const HomeContainer = () => {
     if (e.key === 'Enter') {
       setOmdbStatus(true);
       setSearchText(e.target.value);
-      await fetch(`http://www.omdbapi.com/?apikey=67bbf4fa&s=${searchText}`, {
+      await fetch(`https://www.omdbapi.com/?apikey=67bbf4fa&s=${searchText}`, {
         method: 'GET',
       })
         .then((response: any) => response.json())

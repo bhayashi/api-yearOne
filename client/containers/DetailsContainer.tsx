@@ -16,7 +16,7 @@ const DetailsContainer = () => {
   const [movieDetails, setMovieDetails] = useState(dummyData);
 
   async function getMovieDetails(id: string): Promise<any> {
-    await fetch(`http://www.omdbapi.com/?apikey=67bbf4fa&i=${id}`, {
+    await fetch(`https://www.omdbapi.com/?apikey=67bbf4fa&i=${id}`, {
       method: 'GET',
     })
       .then((response: any) => response.json())
