@@ -2,7 +2,7 @@ import express from 'express';
 import path from 'path';
 // import cors from 'cors';
 
-// require('dotenv').config();
+require('dotenv').config();
 
 const PORT = 3000;
 const app = express();
@@ -17,5 +17,16 @@ app.get('/', (_req, res) => {
 });
 
 app.use((_req, res) => res.sendStatus(404));
+
+// global error handler
+app.use((err, _req, res) => {
+  const defaultErr = {
+    log: 'Express error handler caught unknown middleware error',
+    status: 400,
+    message: { err: 'An error occurred' },
+  };
+  const errObj = { ...defaultErr, err };
+  return res.status(errObj.status).json(errObj.message);
+});
 
 app.listen(PORT, () => console.log('Listening on 3000'));

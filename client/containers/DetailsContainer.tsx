@@ -25,6 +25,19 @@ const DetailsContainer = () => {
       })
       .catch((err) => console.error(err));
   }
+  const [likes, setLikes] = useState(0);
+  const [dislikes, setDislikes] = useState(0);
+  const [btnDisabled, setBtnDisabled] = useState(false);
+
+  const onLike = () => {
+    setLikes(likes + 1);
+    setBtnDisabled(true);
+  };
+
+  const onDislike = () => {
+    setDislikes(dislikes + 1);
+    setBtnDisabled(true);
+  };
 
   const { Title, Director, Year, Plot, Poster } = movieDetails;
 
@@ -45,12 +58,14 @@ const DetailsContainer = () => {
       </p>
       <img className="movie-poster" src={Poster} alt={`Poster for ${Title}`} />
       <div id="like-btn-container">
-        42&nbsp;&nbsp;
+        {likes}
+        &nbsp;&nbsp;
         <button
           className="like-btn"
           id="thumbs-up-btn"
           type="button"
-          value="thumbsUp"
+          disabled={btnDisabled}
+          onClick={onLike}
         >
           <i className="fa fa-thumbs-up" aria-hidden="true" />
         </button>
@@ -58,11 +73,13 @@ const DetailsContainer = () => {
           className="like-btn"
           id="thumbs-down-btn"
           type="button"
-          value="thumbsDown"
+          disabled={btnDisabled}
+          onClick={onDislike}
         >
           <i className="fa fa-thumbs-down" aria-hidden="true" />
         </button>
-        &nbsp;&nbsp;3
+        &nbsp;&nbsp;
+        {dislikes}
       </div>
       <br />
     </div>
