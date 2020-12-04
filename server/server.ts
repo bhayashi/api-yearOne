@@ -15,7 +15,7 @@ app.use(express.json());
 // handle form data correctly
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static('public'));
+app.use(express.static('index.html'));
 
 app.use('/build', express.static(path.resolve(__dirname, '../../build')));
 
