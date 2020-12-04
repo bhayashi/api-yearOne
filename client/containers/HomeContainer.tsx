@@ -5,21 +5,7 @@ import SearchResults from '../components/SearchResults';
 const HomeContainer = () => {
   const [omdbStatus, setOmdbStatus] = useState(true);
   const [searchText, setSearchText] = useState('');
-  const dummyData = {
-    Poster:
-      'https://m.media-amazon.com/images/M/MV5BYzc3OGZjYWQtZGFkMy00YTNlLWE5NDYtMTRkNTNjODc2MjllXkEyXkFqcGdeQXVyNjExODE1MDc@._V1_SX300.jpg',
-    Title: 'Johnny Test',
-    Year: '2005-2014',
-    imdbID: 'tt0454349',
-  };
-  const dummyData2 = {
-    Poster:
-      'https://m.media-amazon.com/images/M/MV5BYzc3OGZjYWQtZGFkMy00YTNlLWE5NDYtMTRkNTNjODc2MjllXkEyXkFqcGdeQXVyNjExODE1MDc@._V1_SX300.jpg',
-    Title: 'Johnny Test: The Last Man From Another Planet Blah BLah',
-    Year: '2005-2014',
-    imdbID: 'tt0454348',
-  };
-  const [omdbResults, setOmdbResults] = useState([dummyData, dummyData2]);
+  const [omdbResults, setOmdbResults] = useState([]);
 
   async function handleEnter(e: any): Promise<any> {
     if (e.key === 'Enter') {

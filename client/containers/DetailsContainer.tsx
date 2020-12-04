@@ -13,7 +13,12 @@ const DetailsContainer = () => {
     Poster:
       'https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg',
   };
+
   const [movieDetails, setMovieDetails] = useState(dummyData);
+  const [likes, setLikes] = useState(0);
+  const [dislikes, setDislikes] = useState(0);
+  const [btnDisabled, setBtnDisabled] = useState(false);
+  const { Title, Director, Year, Plot, Poster } = movieDetails;
 
   async function getMovieDetails(id: string): Promise<any> {
     await fetch(`https://www.omdbapi.com/?apikey=67bbf4fa&i=${id}`, {
@@ -25,11 +30,6 @@ const DetailsContainer = () => {
       })
       .catch((err: Error) => console.error(err));
   }
-
-  const [likes, setLikes] = useState(0);
-  const [dislikes, setDislikes] = useState(0);
-  const [btnDisabled, setBtnDisabled] = useState(false);
-  const { Title, Director, Year, Plot, Poster } = movieDetails;
 
   async function getMovieLikesData(id: string, title: string): Promise<any> {
     await fetch('/movieLikesData', {

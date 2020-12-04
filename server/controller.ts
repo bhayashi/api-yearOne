@@ -24,7 +24,6 @@ dbController.getMovie = (req: any, res: any, next: NextFunction): void => {
 
 dbController.updateMovie = (req: any, res: any, next: NextFunction): void => {
   const { imdbID, title, likes, dislikes } = req.body;
-  //   const values = [imdbID, title, likes, dislikes];
   const Title = title.replace(/'/g, '&apos;');
   let updateMovie = `
       UPDATE movie_likes
