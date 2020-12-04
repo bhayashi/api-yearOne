@@ -10,8 +10,8 @@
   "scripts": {
     "compile": "tsc -p ./",
     "start": "node tsbuild/server/server.js",
-    "heroku-postbuild": "tsc",
-    "postinstall": "tsc",
+    "heroku-postbuild": "tsc && NODE_ENV=production webpack",
+    "postinstall": "tsc && NODE_ENV=production webpack",
     "build": "NODE_ENV=production webpack",
     "dev": "NODE_ENV=development tsc -p ./ && nodemon tsbuild/server/server.js & webpack-dev-server --open --hot",
     "test": "echo \"Error: no test specified\" && exit 1"
