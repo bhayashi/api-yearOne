@@ -1,6 +1,8 @@
 import React from 'react';
+import { SearchResultProps } from '../utils/interfaces';
 
-const SearchResults = (props: any) => {
+// the shape of each movie-title-card on the homepage
+const SearchResults = (props: SearchResultProps) => {
   const { data } = props;
   const { Title, Year, Poster } = data;
   return (

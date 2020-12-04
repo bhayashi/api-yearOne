@@ -1,26 +1,26 @@
 /* eslint-disable object-curly-newline */
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { MovieDetails } from '../utils/interfaces';
 
+// Container for Movie Details
 const DetailsContainer = () => {
   const { imdbID } = useParams<{ imdbID: string }>();
-  const dummyData = {
-    Title: 'Inception',
-    Director: 'Christopher Nolan',
-    Year: '2010',
-    Plot:
-      'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.',
-    Poster:
-      'https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg',
-  };
 
-  const [movieDetails, setMovieDetails] = useState(dummyData);
+  const [movieDetails, setMovieDetails] = useState<MovieDetails>({
+    Title: '',
+    Director: '',
+    Year: '',
+    Plot: '',
+    Poster: '',
+  });
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
   const [btnDisabled, setBtnDisabled] = useState(false);
   const { Title, Director, Year, Plot, Poster } = movieDetails;
 
-  async function getMovieDetails(id: string): Promise<any> {
+  // fetches movie details from OMDB API based on the imdbID
+  async function getMovieDetails(id: string): Promise<void> {
     await fetch(`https://www.omdbapi.com/?apikey=67bbf4fa&i=${id}`, {
       method: 'GET',
     })
@@ -31,7 +31,8 @@ const DetailsContainer = () => {
       .catch((err: Error) => console.error(err));
   }
 
-  async function getMovieLikesData(id: string, title: string): Promise<any> {
+  // fetches data about likes and dislikes from postgreSQL database
+  async function getMovieLikesData(id: string, title: string): Promise<void> {
     await fetch('/movieLikesData', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -48,12 +49,13 @@ const DetailsContainer = () => {
       .catch((err: Error) => console.log(err));
   }
 
+  // posts data about likes and dislikes to postgreSQL database
   async function likeMovie(
     id: string,
     up: number,
     down: number,
     title: string
-  ): Promise<any> {
+  ): Promise<void> {
     await fetch('/likeMovie', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -61,7 +63,6 @@ const DetailsContainer = () => {
     })
       .then((response: any) => response.json())
       .then((response: any) => {
-        console.log('PSQL Movie:', response);
         if (response.likes > likes) {
           setLikes(response.likes);
         }
@@ -72,11 +73,13 @@ const DetailsContainer = () => {
       .catch((err: Error) => console.log(err));
   }
 
+  // fetches movie details from OMDB API and likes data from postgreSQL database
   useEffect(() => {
     getMovieDetails(imdbID);
     getMovieLikesData(imdbID, Title);
   }, []);
 
+  // clicking like or dislike disables both buttons
   const onLike = () => {
     setLikes(likes + 1);
     likeMovie(imdbID, likes + 1, dislikes, Title);
