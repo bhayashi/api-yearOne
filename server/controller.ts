@@ -9,26 +9,13 @@ const db = require('./dbModel');
 const dbController: any = {};
 
 dbController.getMovie = (req: any, res: any, next: NextFunction): void => {
-  const { imdbID, title } = req.body;
+  const { imdbID } = req.body;
   const getMovieByImdbID = `
     SELECT * FROM movie_likes
     WHERE imdbid = '${imdbID}'
   `;
   db.query(getMovieByImdbID)
     .then((response: any) => {
-      if (response.rowCount === 0) {
-        const updateMovie = `
-        INSERT INTO movie_likes (imdbid, title, likes, dislikes)
-        VALUES('${imdbID}', '${title}', 0, 0)
-        RETURNING *;
-      `;
-        db.query(updateMovie)
-          .then((response2: any) => {
-            res.locals.movie = response2;
-            return next();
-          })
-          .catch((err: Error) => next(err));
-      }
       res.locals.movie = response;
       return next();
     })
@@ -38,7 +25,7 @@ dbController.getMovie = (req: any, res: any, next: NextFunction): void => {
 dbController.updateMovie = (req: any, res: any, next: NextFunction): void => {
   const { imdbID, title, likes, dislikes } = req.body;
   //   const values = [imdbID, title, likes, dislikes];
-  //   console.log('VALUES: ', values);
+  const Title = title.replace(/'/g, '&apos;');
   let updateMovie = `
       UPDATE movie_likes
       SET likes = '${likes}',
@@ -49,7 +36,7 @@ dbController.updateMovie = (req: any, res: any, next: NextFunction): void => {
   if (res.locals.movie.rowCount === 0) {
     updateMovie = `
         INSERT INTO movie_likes (imdbid, title, likes, dislikes)
-        VALUES('${imdbID}', '${title}', ${likes}, ${dislikes})
+        VALUES('${imdbID}', '${Title}', ${likes}, ${dislikes})
         RETURNING *;
       `;
   }
@@ -65,16 +52,3 @@ dbController.updateMovie = (req: any, res: any, next: NextFunction): void => {
 };
 
 module.exports = dbController;
-
-/*
-CREATE TABLE movie_likes (
-  id serial PRIMARY KEY,
-  imdbid VARCHAR ( 20 ) UNIQUE NOT NULL,
-  title VARCHAR ( 200 ) NOT NULL,
-  likes INT NOT NULL,
-  dislikes INT NOT NULL
-);
-
-INSERT INTO movie_likes (imdbid, title, likes, dislikes)
-VALUES ('tt0454349', 'Inception', 42, 5);
-*/
