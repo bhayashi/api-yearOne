@@ -19,6 +19,10 @@ module.exports = {
         target: 'http://localhost:3000/',
         secure: false,
       },
+      '/movieLikes': {
+        target: 'http://localhost:3000/movieLikes',
+        secure: false,
+      },
     },
   },
   module: {

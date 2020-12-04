@@ -1,10 +1,15 @@
 import { NextFunction } from 'express';
-import db from './dbModel';
+// import db from './dbModel';
+const db = require('./dbModel');
 
-const dbController = {};
+// interface DBController {
+//   getMovie: () => void;
+// }
 
-dbController.getMovie = (req: Request, res: any, next: NextFunction) => {
-  const imdbID = req.body;
+const dbController: any = {};
+
+dbController.getMovie = (req: any, res: any, next: NextFunction): void => {
+  const { imdbID } = req.body;
   const movie = `
     SELECT * FROM movie_likes
     WHERE imdbid = ${imdbID}
@@ -18,6 +23,7 @@ dbController.getMovie = (req: Request, res: any, next: NextFunction) => {
 };
 
 module.exports = dbController;
+// export default dbController;
 
 /*
 CREATE TABLE movie_likes (
@@ -27,4 +33,7 @@ CREATE TABLE movie_likes (
   likes INT NOT NULL,
   dislikes INT NOT NULL
 );
+
+INSERT INTO movie_likes (imdbid, title, likes, dislikes)
+VALUES ('tt0454349', 'Inception', 42, 5);
 */

@@ -20,17 +20,35 @@ const DetailsContainer = () => {
       method: 'GET',
     })
       .then((response: any) => response.json())
-      .then((response) => {
+      .then((response: any) => {
         setMovieDetails(response);
       })
-      .catch((err) => console.error(err));
+      .catch((err: Error) => console.error(err));
   }
+
+  async function likeMovie(id: string): Promise<any> {
+    console.log('inside likeMovie', JSON.stringify({ imdbID: id }));
+
+    await fetch('/movieLikes', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ imdbID: id }),
+    })
+      .then((response: any) => response.json())
+      .then((response: any) => {
+        console.log('PSQL Movie:', response);
+      })
+      .catch((err: Error) => console.log(err));
+  }
+
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
   const [btnDisabled, setBtnDisabled] = useState(false);
 
+  likeMovie(imdbID);
   const onLike = () => {
     setLikes(likes + 1);
+    likeMovie(imdbID);
     setBtnDisabled(true);
   };
 
