@@ -1,13 +1,32 @@
-# API-YearOne
+# Open Movie Database (sample)
 
 # About
 
-This API sample is deployed on the following Heroku link:
+This sample App is deployed on the following Heroku link:
+
 [https://api-yearone.herokuapp.com/](https://api-yearone.herokuapp.com/)
 
-## Instructions
+It's a proof of concept that allows you to search for a movie title, click on the movie title for more information, and give that movie a thumbs up or thumbs down.
 
-Otherwise, the repository can be cloned to your local machine. Please make sure you have Node and Yarn installed.
+It utilizes [OMDB API](http://www.omdbapi.com/) to fetch metadata about each movie.
+
+# Tech Stack
+
+- React
+- TypeScript
+- WebPack
+- Node.js
+- Express.js
+- PostgreSQL
+- HTML/SCSS
+- Heroku
+- [OMDB API](http://www.omdbapi.com/)
+
+# Instructions
+
+The repository can be cloned to your local machine - though the PostgreSQL database will not work locally since the key is not stored in the repository. This means 'likes' and 'dislikes' will not persist.
+
+Please make sure you have Node and Yarn installed.
 
 ```
 git clone https://github.com/bhayashi/api-yearOne.git
@@ -40,15 +59,3 @@ And then access the site on [http://localhost:3000/](http://localhost:3000/) aft
 ```
 npm start
 ```
-
-## Tech Stack
-
-- React
-- TypeScript
-- WebPack
-- Node.js
-- Express.js
-- PostgreSQL
-- HTML/SCSS
-- Heroku
-- [OMDB API](http://www.omdbapi.com/)

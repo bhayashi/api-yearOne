@@ -1,6 +1,6 @@
 import express from 'express';
 import path from 'path';
-// import dbController from './controller';
+
 import cors from 'cors';
 
 const dbController = require('./controller');
