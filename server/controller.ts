@@ -1,28 +1,37 @@
-import { NextFunction } from 'express';
+import { NextFunction, Request, Response } from 'express';
+
+import { DBResult } from '../client/utils/interfaces';
 
 const db = require('./dbModel');
 
-// interface DBController {
-//   getMovie: () => void;
-// }
-
 const dbController: any = {};
 
-dbController.getMovie = (req: any, res: any, next: NextFunction): void => {
+// queries postgreSQL database for likes and dislikes based on imdbID
+dbController.getMovie = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
   const { imdbID } = req.body;
   const getMovieByImdbID = `
     SELECT * FROM movie_likes
-    WHERE imdbid = '${imdbID}'
+    WHERE imdbid = '${imdbID}';
   `;
   db.query(getMovieByImdbID)
-    .then((response: any) => {
+    .then((response: DBResult) => {
       res.locals.movie = response;
       return next();
     })
     .catch((err: Error) => next(err));
 };
 
-dbController.updateMovie = (req: any, res: any, next: NextFunction): void => {
+// if movie exists in the database, the likes and dislikes get updated
+// else the movie title, imdbID, likes, and dislikes get inserted into table
+dbController.updateMovie = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
   const { imdbID, title, likes, dislikes } = req.body;
   const Title = title.replace(/'/g, '&apos;');
   let updateMovie = `
@@ -40,14 +49,11 @@ dbController.updateMovie = (req: any, res: any, next: NextFunction): void => {
       `;
   }
   db.query(updateMovie)
-    .then((response: any) => {
-      res.locals.movie = response.rows[0];
+    .then((response: DBResult) => {
+      [res.locals.movie] = response.rows;
       return next();
     })
-    .catch((err: Error) => {
-      console.log(err);
-      return next(err);
-    });
+    .catch((err: Error) => next(err));
 };
 
 module.exports = dbController;

@@ -18,3 +18,16 @@ export interface MovieDetails {
   Plot: string;
   Poster: string;
 }
+
+export interface MovieLikes {
+  id: number;
+  imdbid: string;
+  title: string;
+  likes: number;
+  dislikes: number;
+}
+
+export interface DBResult {
+  rowCount: number;
+  rows: Array<MovieLikes>;
+}
