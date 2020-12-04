@@ -26,9 +26,11 @@ const DetailsContainer = () => {
       .catch((err: Error) => console.error(err));
   }
 
-  async function likeMovie(id: string): Promise<any> {
-    console.log('inside likeMovie', JSON.stringify({ imdbID: id }));
+  const [likes, setLikes] = useState(0);
+  const [dislikes, setDislikes] = useState(0);
+  const [btnDisabled, setBtnDisabled] = useState(false);
 
+  async function likeMovie(id: string): Promise<any> {
     await fetch('/movieLikes', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -36,14 +38,12 @@ const DetailsContainer = () => {
     })
       .then((response: any) => response.json())
       .then((response: any) => {
-        console.log('PSQL Movie:', response);
+        console.log('PSQL Movie:', response[0]);
+        setLikes(response[0].likes);
+        setDislikes(response[0].dislikes);
       })
       .catch((err: Error) => console.log(err));
   }
-
-  const [likes, setLikes] = useState(0);
-  const [dislikes, setDislikes] = useState(0);
-  const [btnDisabled, setBtnDisabled] = useState(false);
 
   likeMovie(imdbID);
   const onLike = () => {

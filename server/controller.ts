@@ -12,14 +12,17 @@ dbController.getMovie = (req: any, res: any, next: NextFunction): void => {
   const { imdbID } = req.body;
   const movie = `
     SELECT * FROM movie_likes
-    WHERE imdbid = ${imdbID}
+    WHERE imdbid = '${imdbID}'
   `;
   db.query(movie)
     .then((response: any) => {
       res.locals.movie = response.rows;
       return next();
     })
-    .catch((err: Error) => next(err));
+    .catch((err: Error) => {
+      console.log(err);
+      next(err);
+    });
 };
 
 module.exports = dbController;

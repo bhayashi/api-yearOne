@@ -20,7 +20,7 @@ app.use(express.static('public'));
 app.use('/build', express.static(path.resolve(__dirname, '../../build')));
 
 app.post('/movieLikes', dbController.getMovie, (_req, res) => {
-  res.status(200).json(res.locals);
+  res.status(200).json(res.locals.movie);
 });
 
 app.get('/', (_req, res) => {
