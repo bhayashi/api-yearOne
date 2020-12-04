@@ -19,9 +19,18 @@ app.use(express.static('public'));
 
 app.use('/build', express.static(path.resolve(__dirname, '../../build')));
 
-app.post('/movieLikes', dbController.getMovie, (_req, res) => {
+app.post('/movieLikesData', dbController.getMovie, (_req, res) => {
   res.status(200).json(res.locals.movie);
 });
+
+app.post(
+  '/likeMovie',
+  dbController.getMovie,
+  dbController.updateMovie,
+  (_req, res) => {
+    res.status(200).json(res.locals.movie);
+  }
+);
 
 app.get('/', (_req, res) => {
   res.status(200).sendFile(path.resolve(__dirname, '../../public/index.html'));

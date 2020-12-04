@@ -29,47 +29,65 @@ const DetailsContainer = () => {
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
   const [btnDisabled, setBtnDisabled] = useState(false);
+  const { Title, Director, Year, Plot, Poster } = movieDetails;
 
-  async function likeMovie(id: string, up: number, down: number): Promise<any> {
-    await fetch('/movieLikes', {
+  async function getMovieLikesData(id: string, title: string): Promise<any> {
+    await fetch('/movieLikesData', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ imdbID: id, likes: up, dislikes: down }),
+      body: JSON.stringify({ imdbID: id, title }),
     })
       .then((response: any) => response.json())
       .then((response: any) => {
-        console.log('PSQL Movie:', response[0]);
-        if (response[0].likes > likes) {
-          setLikes(response[0].likes);
+        if (response.rowCount > 0) {
+          const data = response.rows[0];
+          setLikes(data.likes);
+          setDislikes(data.dislikes);
         }
-        if (response[0].dislikes > dislikes) {
-          setDislikes(response[0].dislikes);
+      })
+      .catch((err: Error) => console.log(err));
+  }
+
+  async function likeMovie(
+    id: string,
+    up: number,
+    down: number,
+    title: string
+  ): Promise<any> {
+    await fetch('/likeMovie', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ imdbID: id, likes: up, dislikes: down, title }),
+    })
+      .then((response: any) => response.json())
+      .then((response: any) => {
+        console.log('PSQL Movie:', response);
+        if (response.likes > likes) {
+          setLikes(response.likes);
+        }
+        if (response.dislikes > dislikes) {
+          setDislikes(response.dislikes);
         }
       })
       .catch((err: Error) => console.log(err));
   }
 
   useEffect(() => {
-    likeMovie(imdbID, likes, dislikes);
+    getMovieDetails(imdbID);
+    getMovieLikesData(imdbID, Title);
   }, []);
 
   const onLike = () => {
     setLikes(likes + 1);
-    likeMovie(imdbID, likes, dislikes);
+    likeMovie(imdbID, likes + 1, dislikes, Title);
     setBtnDisabled(true);
   };
 
   const onDislike = () => {
     setDislikes(dislikes + 1);
-    likeMovie(imdbID, likes, dislikes);
+    likeMovie(imdbID, likes, dislikes + 1, Title);
     setBtnDisabled(true);
   };
-
-  const { Title, Director, Year, Plot, Poster } = movieDetails;
-
-  if (Title === 'null') {
-    getMovieDetails(imdbID);
-  }
 
   return (
     <div id="details-card">
