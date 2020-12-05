@@ -21,7 +21,7 @@ const DetailsContainer = () => {
 
   // fetches movie details from OMDB API based on the imdbID
   async function getMovieDetails(id: string): Promise<void> {
-    await fetch('/getMovieDetails', {
+    await fetch('/omdb/details', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ omdbID: id }),
@@ -35,7 +35,7 @@ const DetailsContainer = () => {
 
   // fetches data about likes and dislikes from postgreSQL database
   async function getMovieLikesData(id: string, title: string): Promise<void> {
-    await fetch('/movieLikesData', {
+    await fetch('/likes/data', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ imdbID: id, title }),
@@ -58,7 +58,7 @@ const DetailsContainer = () => {
     down: number,
     title: string
   ): Promise<void> {
-    await fetch('/likeMovie', {
+    await fetch('/likes/update', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ imdbID: id, likes: up, dislikes: down, title }),

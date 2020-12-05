@@ -16,7 +16,7 @@ const HomeContainer = () => {
       if (e.target !== null) {
         setSearchText((e.target as HTMLInputElement).value);
       }
-      fetch('/searchOMDB', {
+      fetch('/omdb/search', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ search: searchText }),

@@ -3,8 +3,8 @@ import path from 'path';
 
 import cors from 'cors';
 
-const dbController = require('./dbController');
-const apiController = require('./apiController');
+const apiRouter = require('./routers/apiRouter');
+const dbRouter = require('./routers/dbRouter');
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -18,26 +18,9 @@ app.use(express.static('index.html'));
 
 app.use('/build', express.static(path.resolve(__dirname, '../../build')));
 
-app.post('/movieLikesData', dbController.getMovie, (_req, res) => {
-  res.status(200).json(res.locals.movie);
-});
+app.use('/omdb', apiRouter);
 
-app.post(
-  '/likeMovie',
-  dbController.getMovie,
-  dbController.updateMovie,
-  (_req, res) => {
-    res.status(200).json(res.locals.movie);
-  }
-);
-
-app.post('/searchOMDB', apiController.searchOMDB, (_req, res) => {
-  res.status(200).json(res.locals.movieList);
-});
-
-app.post('/getMovieDetails', apiController.getMovieDetails, (_req, res) => {
-  res.status(200).json(res.locals.movieData);
-});
+app.use('/likes', dbRouter);
 
 app.get('/', (_req, res) => {
   res.status(200).sendFile(path.resolve(__dirname, '../../public/index.html'));
