@@ -14,7 +14,7 @@ app.use(express.json());
 // handle form data correctly
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static('index.html'));
+app.use(express.static('public'));
 
 // serves the webpack production build of the application
 app.use('/build', express.static(path.resolve(__dirname, '../../build')));
