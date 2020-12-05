@@ -16,8 +16,10 @@ const HomeContainer = () => {
       if (e.target !== null) {
         setSearchText((e.target as HTMLInputElement).value);
       }
-      fetch(`https://www.omdbapi.com/?apikey=67bbf4fa&s=${searchText}`, {
-        method: 'GET',
+      fetch('/searchOMDB', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ search: searchText }),
       })
         .then((response: Response) => response.json())
         .then((response) => {

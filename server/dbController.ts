@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { DBResult } from '../client/utils/interfaces';
+import { DBResult } from './utils/interfaces';
 
 const db = require('./dbModel');
 

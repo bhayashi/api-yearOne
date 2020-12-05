@@ -21,8 +21,10 @@ const DetailsContainer = () => {
 
   // fetches movie details from OMDB API based on the imdbID
   async function getMovieDetails(id: string): Promise<void> {
-    await fetch(`https://www.omdbapi.com/?apikey=67bbf4fa&i=${id}`, {
-      method: 'GET',
+    await fetch('/getMovieDetails', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ omdbID: id }),
     })
       .then((response: any) => response.json())
       .then((response: any) => {

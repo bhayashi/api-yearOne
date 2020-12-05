@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 export interface MovieSearchResult {
   Title: string;
   Year: string;

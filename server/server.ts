@@ -3,7 +3,8 @@ import path from 'path';
 
 import cors from 'cors';
 
-const dbController = require('./controller');
+const dbController = require('./dbController');
+const apiController = require('./apiController');
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -29,6 +30,14 @@ app.post(
     res.status(200).json(res.locals.movie);
   }
 );
+
+app.post('/searchOMDB', apiController.searchOMDB, (_req, res) => {
+  res.status(200).json(res.locals.movieList);
+});
+
+app.post('/getMovieDetails', apiController.getMovieDetails, (_req, res) => {
+  res.status(200).json(res.locals.movieData);
+});
 
 app.get('/', (_req, res) => {
   res.status(200).sendFile(path.resolve(__dirname, '../../public/index.html'));
