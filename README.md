@@ -30,7 +30,12 @@ It utilizes [OMDB API](http://www.omdbapi.com/) to fetch metadata about each mov
 
 # Instructions
 
-The repository can be cloned to your local machine - though the PostgreSQL database and OMDB API will not work locally since the keys are not stored in the repository.
+The repository can be cloned to your local machine - though the PostgreSQL database and OMDB API will not work locally without a .env file since the keys are not stored in the repository.
+
+```
+PG_URI=''
+OMDB_API_KEY=''
+```
 
 Please make sure you have Node and Yarn installed.
 
