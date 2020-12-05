@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 const express = require('express');
-const dbController = require('../dbController');
+const dbController = require('../controllers/dbController');
 
 const router = express.Router();
 

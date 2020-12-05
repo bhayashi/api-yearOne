@@ -1,8 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
-import { MovieDetails, MovieSearchResult } from '../client/utils/interfaces';
+import { MovieDetails, MovieSearchResult } from '../../client/utils/interfaces';
 
 const axios = require('axios').default;
-
 require('dotenv').config();
 
 const apiController: any = {};

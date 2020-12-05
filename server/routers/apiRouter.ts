@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 const express = require('express');
-const apiController = require('../apiController');
+const apiController = require('../controllers/apiController');
 
 const router = express.Router();
 

@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { DBResult } from './utils/interfaces';
+import { DBResult } from '../../client/utils/interfaces';
 
-const db = require('./dbModel');
+const db = require('../dbModel');
 
 const dbController: any = {};
 
