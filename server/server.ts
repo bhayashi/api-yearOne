@@ -16,10 +16,13 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('index.html'));
 
+// serves the webpack production build of the application
 app.use('/build', express.static(path.resolve(__dirname, '../../build')));
 
+// fetches movie data from OMDB API
 app.use('/omdb', apiRouter);
 
+// fetches 'likes' data from postgreSQL database
 app.use('/likes', dbRouter);
 
 app.get('/', (_req, res) => {
