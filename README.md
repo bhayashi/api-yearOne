@@ -30,7 +30,7 @@ It utilizes [OMDB API](http://www.omdbapi.com/) to fetch metadata about each mov
 
 # Instructions
 
-The repository can be cloned to your local machine - though the PostgreSQL database will not work locally since the key is not stored in the repository. This means 'likes' and 'dislikes' data will not persist.
+The repository can be cloned to your local machine - though the PostgreSQL database and OMDB API will not work locally since the keys are not stored in the repository.
 
 Please make sure you have Node and Yarn installed.
 
